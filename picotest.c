@@ -77,7 +77,7 @@ int done_testing(void)
     return test_fail[test_level];
 }
 
-void subtest(const char *name, void (*cb)(void))
+void enter_subtest(const char *name)
 {
     ++test_level;
 
@@ -85,9 +85,10 @@ void subtest(const char *name, void (*cb)(void))
     test_fail[test_level] = 0;
 
     note("Subtest: %s", name);
+}
 
-    cb();
-
+void exit_subtest(const char *name)
+{
     done_testing();
 
     --test_level;
